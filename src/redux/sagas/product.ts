@@ -3,8 +3,12 @@ import { ProductFilter, ProductsRequested, productsReceived, productsError  } fr
 import { baseUrl } from '../../config/fakeStore';
 
 
-const requestProducts = (filter: ProductFilter): Promise<Response> => {
-    return fetch(`${baseUrl}/products`).then(response => response.json());
+const requestProducts = (filter?: ProductFilter): Promise<Response> => {
+    let filterUrl = '';
+    if (filter?.category) {
+        filterUrl += `/category/${filter.category}`;
+    }
+    return fetch(`${baseUrl}/products${filterUrl}`).then(response => response.json());
 }
 
 const fetchProducts = function*(action: ProductsRequested): Generator<any> {

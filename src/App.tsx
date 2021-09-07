@@ -9,7 +9,6 @@ import { productsRequested } from './redux/ducks/product';
 class App extends Component<any, any> {
   componentDidMount() {
     this.props.getUser();
-    this.props.productsRequested();
   }
 
   render () {
@@ -20,7 +19,7 @@ class App extends Component<any, any> {
         <div className="App-header">
           Fake store API
         </div>
-        <ProductList products={products} loading={loading} error={error} />
+        <ProductList productsRequested={this.props.productsRequested} products={products} loading={loading} error={error} />
       </div>
     );
   }

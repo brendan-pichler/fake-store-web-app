@@ -3,6 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { Product, ProductFilter } from '../redux/ducks/product';
 import ProductCard from './ProductCard';
 import ProductPagination from './ProductPagination'
+import ProductSearch from './ProductSearch';
 
 class ProductList extends Component<Props, State> {
     constructor(props: Props) {
@@ -11,21 +12,28 @@ class ProductList extends Component<Props, State> {
         this.state = {
             activePage: 1,
             itemsPerPage: 4,
-            filter: undefined
+            productFilter: undefined
         }
 
         this.searchWithFilter = this.searchWithFilter.bind(this);
         this.setActivePage = this.setActivePage.bind(this);
+        this.setFilter = this.setFilter.bind(this);
     }
 
     setActivePage(activePage: number) {
         this.setState({
-            activePage
+            activePage,
         });
     }
 
     searchWithFilter() {
-        this.props.productsRequested(this.state.filter);
+        this.props.productsRequested(this.state.productFilter);
+    }
+
+    setFilter(productFilter: ProductFilter) {
+        this.setState({
+            productFilter
+        }, () => this.searchWithFilter());
     }
 
     componentDidMount() {
@@ -35,27 +43,30 @@ class ProductList extends Component<Props, State> {
     render() {
         return (
             <Container className="ProductList" fluid>
-                <Container>
+                    <Row className="ProductFilters">
+                        <Col><ProductSearch setFilter={this.setFilter} productFilter={this.state.productFilter} /></Col>
+                    </Row>
                     <Row className="ProductFilters">
                         <Col><ProductPagination setActivePage={this.setActivePage} itemCount={this.props.products.length} itemsPerPage={this.state.itemsPerPage} activePage={this.state.activePage} /></Col>
-                        <Col>Search bar and filter</Col>
                     </Row>
-                <Row>
-                    {this.props.error ? 
-                    this.props.error.message : 
-                    this.props.loading ? 
-                    "Loading..." : 
-                    this.props.products.slice((this.state.activePage - 1) * this.state.itemsPerPage, this.state.activePage * this.state.itemsPerPage)
-                        .map((product: Product) => {
-                            return (
-                                <Col xs={12} sm={6} md={4} key={product.title.toString()}>
-                                    <ProductCard product={product}/>
-                                </Col>
-                            )
-                        })
-                    }
-                </Row>
-                </Container>
+                    <Row>
+                        {this.props.error ? 
+                        this.props.error.message : 
+                        this.props.loading ? 
+                        "Loading..." : 
+                        this.props.products.slice((this.state.activePage - 1) * this.state.itemsPerPage, this.state.activePage * this.state.itemsPerPage)
+                            .map((product: Product) => {
+                                return (
+                                    <Col xs={12} sm={6} md={4} key={product.title.toString()}>
+                                        <ProductCard product={product}/>
+                                    </Col>
+                                )
+                            })
+                        }
+                    </Row>
+                    <Row className="ProductFilters">
+                        <Col><ProductPagination setActivePage={this.setActivePage} itemCount={this.props.products.length} itemsPerPage={this.state.itemsPerPage} activePage={this.state.activePage} /></Col>
+                    </Row>
             </Container>
         )
     }
@@ -71,7 +82,7 @@ interface Props {
 interface State {
     activePage: number;
     itemsPerPage: number;
-    filter: ProductFilter;
+    productFilter: ProductFilter;
 }
 
 export default ProductList;

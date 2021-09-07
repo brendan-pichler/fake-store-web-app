@@ -1,6 +1,27 @@
 import { call, put } from 'redux-saga/effects';
-import { ProductFilter, ProductsRequested, productsReceived, productsError  } from '../ducks/product'
+import { ProductFilter, ProductsRequested, productsReceived, productsError, Product, ProductKeys  } from '../ducks/product'
 import { baseUrl } from '../../config/fakeStore';
+
+const filterProducts = (products: Product[], productFilter: ProductFilter): Product[] => {
+    if (productFilter === undefined) {
+        return products;
+    } else {
+        return products.filter((product: Product) => {
+            const productFilterKeys = Object.keys(productFilter);
+            return productFilterKeys.filter((filterKey) => {
+                const productValue = product[filterKey as ProductKeys];
+                const filterValue = productFilter[filterKey as ProductKeys];
+
+                if (typeof productValue === "string" && typeof filterValue === "string") {
+                    return productValue.toLowerCase().indexOf(filterValue.toLowerCase()) > -1 ;
+                } else {
+                    return true;
+                }
+
+            }).length === productFilterKeys.length;
+        })
+    }
+}
 
 
 const requestProducts = (filter?: ProductFilter): Promise<Response> => {
@@ -14,7 +35,8 @@ const requestProducts = (filter?: ProductFilter): Promise<Response> => {
 const fetchProducts = function*(action: ProductsRequested): Generator<any> {
     try {
         const products: any = yield call(requestProducts, action.filter);
-        yield put(productsReceived(products));
+        const filteredProducts = filterProducts(products, action.filter);
+        yield put(productsReceived(filteredProducts));
     } catch (error) {
         yield put(productsError(error as Error));
     }

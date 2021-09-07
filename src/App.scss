@@ -25,23 +25,30 @@
 
 .ProductList {
   justify-content: center;
+  max-width: 80%;
+
   .row {
     border: 1px solid rgba(0, 0, 0, 0.125);
+    margin: 1rem;
   }
 
   .ProductFilters {
     text-transform: capitalize;
-    max-width: 75rem;
-    padding: 1rem;
+    padding: 0.5rem;
     background-color: rgba(0, 0, 0, 0.03);
     border: 1px solid rgba(0, 0, 0, 0.125);
-    margin-bottom: 1rem;
 
+    ul {
+      margin: 0px;
+    }
   }
 }
 
+.capitalise {
+  text-transform: capitalize;
+}
+
 .ProductCard {
-  max-width: 25rem;
   margin: 1rem;
   justify-content: center;
 

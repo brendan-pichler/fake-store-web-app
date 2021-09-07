@@ -77,4 +77,7 @@ export interface Product {
     image: string;
 }
 
+export type ProductKeys = keyof Product;
+
+
 export default userReducer;

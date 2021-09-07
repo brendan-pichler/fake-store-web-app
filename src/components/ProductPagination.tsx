@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import { Pagination } from 'react-bootstrap';
-import { Product } from '../redux/ducks/product';
 
 class ProductPagination extends Component<Props, State> {
     constructor(props: Props) {
@@ -27,9 +26,9 @@ class ProductPagination extends Component<Props, State> {
         return (
             <Pagination>
                 <Pagination.First onClick={(_) => this.props.setActivePage(1)} />
-                <Pagination.Prev onClick={(_) => this.props.setActivePage(this.props.activePage - 1)} />
+                <Pagination.Prev onClick={(_) => this.props.setActivePage(Math.max(this.props.activePage - 1, 1))} />
                 {this.getPaginationItems()}
-                <Pagination.Next onClick={(_) => this.props.setActivePage(this.props.activePage + 1)}/>
+                <Pagination.Next onClick={(_) => this.props.setActivePage(Math.min(this.props.activePage + 1, this.props.itemCount / this.props.itemsPerPage))}/>
                 <Pagination.Last onClick={(_) => this.props.setActivePage(this.props.itemCount / this.props.itemsPerPage)}/>
             </Pagination>
         )

@@ -17,7 +17,7 @@ class App extends Component<any, any> {
     return (
       <div className="App">
         <div className="App-header">
-          Fake store API
+          Fake Store API
         </div>
         <ProductList productsRequested={this.props.productsRequested} products={products} loading={loading} error={error} />
       </div>

@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import './App.css';
+import './App.scss';
 import {  connect } from 'react-redux';
 import ProductList from './components/ProductList';
 import { bindActionCreators } from 'redux';
@@ -17,6 +17,9 @@ class App extends Component<any, any> {
 
     return (
       <div className="App">
+        <div className="App-header">
+          Fake store API
+        </div>
         <ProductList products={products} loading={loading} error={error} />
       </div>
     );

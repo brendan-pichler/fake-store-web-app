@@ -1,7 +1,7 @@
 @import "~bootstrap/scss/bootstrap";
 $corner-roundedness: 20px;
 $max-app-width: 1200px;
-$pagination-button-width: 3rem;
+$pagination-button-width: 3.5rem;
 
 .App {
   text-align: center;
@@ -11,6 +11,10 @@ $pagination-button-width: 3rem;
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.App-content {
+  min-height: 100vh;
 }
 
 .App-header {
@@ -32,7 +36,13 @@ $pagination-button-width: 3rem;
   align-items: center;
   justify-content: center;
   font-size: 10px;
+  margin-top: auto;
   color: white;
+}
+
+.cart-card {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .user-ribbon {
@@ -67,6 +77,7 @@ $pagination-button-width: 3rem;
 
 .ProductList {
   justify-content: center;
+  padding: 0px;
   border-radius: $corner-roundedness;
   max-width: $max-app-width;
 
@@ -80,35 +91,42 @@ $pagination-button-width: 3rem;
     background-color: rgba(0, 0, 0, 0.03);
     border: 1px solid rgba(0, 0, 0, 0.125);
 
-    .input-group {
-      text-transform: capitalize;
+    .input-wide-pagination {
+      width: $pagination-button-width * 7
+    }
 
+    .input-narrow-pagination {
+      width: $pagination-button-width * 5
+    }
+
+    .btn-narrow-search {
+      text-transform: capitalize;
       .btn {
         width: 4rem;
+      }
+    }
+    .btn-wide-search {
+      text-transform: capitalize;
+      .btn {
+        width: 8rem;
       }
     }
 
     .page-number-text {
       font-size: calc(10px + 0.5vmin);
       color:rgba(0, 0, 0, 0.6);
+      padding: 0.5rem;
       margin: auto;
       vertical-align: middle;
     }
     
-    li {
-      width: $pagination-button-width;
-    }
-
-    .page-link {
-      height: $pagination-button-width;
-    }
-
-    ul {
+    .page-buttons {
       margin: auto;
-      width: $pagination-button-width * 5;
-    }
 
-    
+      .btn {
+        width: $pagination-button-width;
+      }
+    }
   }
 }
 
@@ -150,8 +168,4 @@ $pagination-button-width: 3rem;
   .card-header {
     text-transform: capitalize;
   }
-}
-
-.App-link {
-  color: #61dafb;
 }

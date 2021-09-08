@@ -60,7 +60,7 @@ class CartModal extends Component<Props, State> {
                         return (
                                 <Row key={cartProduct.id}>
                                     <Col>
-                                    <Card>
+                                    <Card className="cart-card">
                                         <Card.Body>
                                         <Card.Title>{cartProduct.title}</Card.Title>
                                             <ListGroup variant="flush">

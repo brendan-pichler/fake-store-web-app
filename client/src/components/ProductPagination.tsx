@@ -1,5 +1,6 @@
 import { Component } from 'react';
-import { Pagination } from 'react-bootstrap';
+import { InputGroup, Button } from 'react-bootstrap';
+import { ChevronDoubleLeft, ChevronDoubleRight, ChevronLeft, ChevronRight } from 'react-bootstrap-icons'
 
 class ProductPagination extends Component<Props, State> {
     constructor(props: Props) {
@@ -19,9 +20,9 @@ class ProductPagination extends Component<Props, State> {
 
         for (let i = 1; i <= Math.ceil(this.props.itemCount / this.props.itemsPerPage); i++) {
             paginationItems.push(
-                <Pagination.Item key={i} active={i === this.props.activePage} onClick={(_) => this.props.setActivePage(i)}>
+                <Button variant="outline-secondary" key={i} active={i === this.props.activePage} onClick={(_) => this.props.setActivePage(i)}>
                     {i}
-                </Pagination.Item>,
+                </Button>,
             )
         }
 
@@ -50,14 +51,15 @@ class ProductPagination extends Component<Props, State> {
     }
 
     render() {
+        const inputClass = this.state.maxPaginationItems !== 1 ? "input-wide-pagination" : "input-narrow-pagination";
         return (
-            <Pagination>
-                <Pagination.First onClick={(_) => this.props.setActivePage(1)} />
-                <Pagination.Prev onClick={(_) => this.props.setActivePage(Math.max(this.props.activePage - 1, 1))} />
+            <InputGroup className={`${inputClass} page-buttons`}>
+                <Button variant="outline-secondary" onClick={(_) => this.props.setActivePage(1)}><ChevronDoubleLeft /></Button>
+                <Button variant="outline-secondary" onClick={(_) => this.props.setActivePage(Math.max(this.props.activePage - 1, 1))}><ChevronLeft /></Button>
                 {this.getPaginationItems()}
-                <Pagination.Next onClick={(_) => this.props.setActivePage(Math.min(this.props.activePage + 1, this.getMaxPage()))}/>
-                <Pagination.Last onClick={(_) => this.props.setActivePage(this.getMaxPage())}/>
-            </Pagination>
+                <Button variant="outline-secondary" onClick={(_) => this.props.setActivePage(Math.min(this.props.activePage + 1, this.getMaxPage()))}><ChevronRight /></Button>
+                <Button variant="outline-secondary" onClick={(_) => this.props.setActivePage(this.getMaxPage())}><ChevronDoubleRight /></Button>
+            </InputGroup>
         )
     }
 }

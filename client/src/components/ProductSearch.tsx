@@ -42,10 +42,11 @@ class ProductPagination extends Component<Props, State> {
     
     render() {
         const categories = ["electronics", "jewelery", "men's clothing", "women's clothing"];
-        let categoryFilter = this.props.productFilter?.category ? this.sentenceToUpperCase(this.props.productFilter.category) : "Category";
+        const categoryFilter = this.props.productFilter?.category ? this.sentenceToUpperCase(this.props.productFilter.category) : "Category";
+        const buttonClass = this.state.smallScreen === true ? "btn-narrow-search" : "btn-wide-search";
 
         return (
-            <InputGroup>
+            <InputGroup className={buttonClass}>
                 <DropdownButton
                     variant="outline-secondary"
                     title={<span><Funnel />{!this.state.smallScreen ? ` ${categoryFilter}` : null}</span>}

@@ -48,9 +48,9 @@ class ProductList extends Component<Props, State> {
                         <Col><ProductSearch setFilter={this.setFilter} productFilter={this.state.productFilter} /></Col>
                     </Row>
                     <Row className="ProductFilters">
-                        <Col sm={3}></Col>
-                        <Col sm={6}><ProductPagination setActivePage={this.setActivePage} itemCount={this.props.products?.length} itemsPerPage={this.state.itemsPerPage} activePage={this.state.activePage} /></Col>
-                        <Col sm={3} className="page-number-text">Displaying {(this.state.activePage - 1) * this.state.itemsPerPage + 1} - {this.state.activePage * this.state.itemsPerPage} of {this.props.products?.length} items.</Col>
+                        <Col md={3} sm={12}></Col>
+                        <Col md={6} xs={12}><ProductPagination setActivePage={this.setActivePage} itemCount={this.props.products?.length} itemsPerPage={this.state.itemsPerPage} activePage={this.state.activePage} /></Col>
+                        <Col md={3} xs={12} className="page-number-text">Displaying {(this.state.activePage - 1) * this.state.itemsPerPage + 1} - {this.state.activePage * this.state.itemsPerPage} of {this.props.products?.length} items.</Col>
                     </Row>
                     <Row>
                         {this.props.error ? 

@@ -19,13 +19,15 @@ class App extends Component<any, any> {
 
     return (
       <div className="App">
-        <div className="App-header">
-          Fake Store Web Application
-        </div>
-        <UserRibbon user={this.props.user} cart={this.props.cart.cart} />
-        <ProductList productsRequested={this.props.productsRequested} products={products} loading={loading} error={error} />
+          <div className="App-content">
+            <div className="App-header">
+              Fake Store Web Application
+            </div>
+            <UserRibbon user={this.props.user} cart={this.props.cart.cart} />
+            <ProductList productsRequested={this.props.productsRequested} products={products} loading={loading} error={error} />
+          </div>
         <div className="App-footer">
-          Fake Store Web Application - Brendan Pichler - brendanpichler@gmail.com
+            Fake Store Web Application - Brendan Pichler - brendanpichler@gmail.com
         </div>
       </div>
     );

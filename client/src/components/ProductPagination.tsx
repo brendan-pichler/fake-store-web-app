@@ -6,8 +6,7 @@ class ProductPagination extends Component<Props, State> {
         super(props);
 
         this.state = {
-            // maxPaginationItems: window.innerWidth >= 576 ? window.innerWidth >= 768 ? window.innerWidth >= 992 ? 7 : 5 : 3 : 3,
-            maxPaginationItems: 3,
+            maxPaginationItems:  window.innerWidth < 576 ? 1 : 3,
         }
 
         this.getPaginationItems = this.getPaginationItems.bind(this);

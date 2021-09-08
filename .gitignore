@@ -8,6 +8,7 @@ node_modules
 # testing
 /coverage
 build
+.vscode
 
 # misc
 .DS_Store

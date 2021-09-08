@@ -21,7 +21,11 @@ class ProductPagination extends Component<Props, State> {
     }
 
     clearFilter() {
-        this.props.setFilter(undefined);
+        this.setState({
+            searchText: ""
+        }, ()=> {
+            this.props.setFilter(undefined);
+        })
     }
 
     handleSearch() {
@@ -52,11 +56,12 @@ class ProductPagination extends Component<Props, State> {
                     })}
                 </DropdownButton>
                 <FormControl
-                    placeholder="Product Search"
-                    aria-label="Product Search"
+                    placeholder="Search"
+                    aria-label="Search"
                     aria-describedby="basic-addon2"
-                    onChange={(e) => this.setState({ searchText: e.target.value })}
-                    onKeyPress={(e) => e.key === 'Enter' ? this.handleSearch() : null}
+                    value={this.state.searchText}
+                    onChange={(e: any) => this.setState({ searchText: e.target.value })}
+                    onKeyPress={(e: any) => e.key === 'Enter' ? this.handleSearch() : null}
                 />
                 <Button variant="outline-secondary" id="button-addon2" onClick={this.handleSearch}>
                     <Search />{!this.state.smallScreen ? " Search" : null}

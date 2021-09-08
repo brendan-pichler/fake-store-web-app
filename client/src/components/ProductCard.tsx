@@ -22,7 +22,7 @@ class ProductCard extends Component<Props, State> {
                     <Card.Title>{`$${(+this.props.product.price.toFixed(2)).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`}</Card.Title>
                 </Card.Body>
                 <Card.Footer>
-                    <Button variant="primary">Add to Cart</Button>
+                    <Button className="btn-add-to-cart" variant="primary">Add to Cart</Button>
                 </Card.Footer>
             </Card>
         )

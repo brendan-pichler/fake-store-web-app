@@ -2,7 +2,7 @@
 
 import { Component } from 'react';
 import { InputGroup, FormControl, Button, DropdownButton, Dropdown } from 'react-bootstrap';
-import { ProductFilter } from '../redux/ducks/product';
+import { ProductFilter } from '../redux/containers/product';
 import { Search, XCircle, Funnel } from 'react-bootstrap-icons';
 
 class ProductPagination extends Component<Props, State> {
@@ -43,6 +43,8 @@ class ProductPagination extends Component<Props, State> {
     render() {
         const categories = ["electronics", "jewelery", "men's clothing", "women's clothing"];
         const categoryFilter = this.props.productFilter?.category ? this.sentenceToUpperCase(this.props.productFilter.category) : "Category";
+        
+        // Need to change the width of the buttons as in the mobile version the text is not displayed, just the symbol
         const buttonClass = this.state.smallScreen === true ? "btn-narrow-search" : "btn-wide-search";
 
         return (

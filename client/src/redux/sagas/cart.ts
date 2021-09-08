@@ -1,6 +1,6 @@
 import { call, put } from 'redux-saga/effects';
 import { baseUrl } from '../../config/fakeStore';
-import { Cart, cartReceived, cartError } from '../ducks/cart';
+import { Cart, cartReceived, cartError } from '../containers/cart';
 
 const requestCarts = (): Promise<Response> => {
     return fetch(`${baseUrl}/carts/user/1`).then(response => response.json());

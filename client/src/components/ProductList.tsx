@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { Container, Row, Col, Spinner } from 'react-bootstrap';
-import { Product, ProductFilter } from '../redux/ducks/product';
+import { Product, ProductFilter } from '../redux/containers/product';
 import ProductCard from './ProductCard';
 import ProductPagination from './ProductPagination'
 import ProductSearch from './ProductSearch';

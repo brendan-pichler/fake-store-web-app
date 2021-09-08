@@ -66,13 +66,15 @@ For Git, I used branching workflows. Branch for new feature, develop with atomic
 
 I am including some notes about the application architecture here where it differs from what I would design for an enterprise application here.
 
-Obviously, the Fake Store API is completely insecure, everyone can access everyone's carts, user details, etc. In a real application, the calls to the api would be passed to the backend where the session key is verified and data is retrieved. I would also never display a user password in the application, or even store it in the database without hashing and salting first, but have included it because it is in the requirements.
+Obviously, the Fake Store API is completely insecure, everyone can access everyone's carts, user details, etc. In a real application, the calls to the api would be passed to the backend where the session key is authenticated and data is retrieved. I would also never display a user password in the application, or even store it in a database without hashing and salting first, but have included it because it is in the requirements.
 
-In this application, filtering has been done after receiving data from the database (except in the case of retrieving the Category) as the API doesn't support filtering on arbitrary fields. The filtering algorithm will match the search attribute to the corresponding product attribute, after pulling all the products from the database. With a lot of products, this would cause poor performance. Normally, I would make a call to the backend, which would then construct a database query with the filter and return the results. Pagination would be done in a similar way. (E.g. using OFFSET and FETCH NEXT in SQL).
+In this application, filtering has been done after receiving data from the database (except in the case of retrieving the Category) as the API doesn't support filtering on arbitrary fields. The filtering algorithm will match the search attribute to the corresponding product attribute, after pulling all the products from the database. With a lot of products, this would cause poor performance. Normally, I would make a call to the backend, which would then construct a database query with the filter and return the results. Pagination would be done in a similar way, but has been done with front end logic in the application. (E.g. using OFFSET and FETCH NEXT in SQL).
 
 ## Notes about Software Design and Principles
 
 Code linting and formatting: When working with a team, I always enforce code linting and formatting with pre-commit hooks using tools like eslint and prettify. Pre-merge I would run unit tests. Although, for this project, I haven't bothered.
+
+Comments: My normal philosphy is comment why when the why isn't obvious, code should more or less comment itself with well named functions and variables.
 
 Repo structure: Normally, I would use a DEV, UAT, PROD branching scheme in the repo and each would use a continuous delivery pipeline to automatically build and deploy to the relevant environment on AWS.
 

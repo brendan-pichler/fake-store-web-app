@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import { Modal, Button, Card, Row, Col, Container, ListGroup, Spinner } from 'react-bootstrap';
-import { Cart } from '../redux/ducks/cart';
-import { Product } from '../redux/ducks/product';
+import { Cart } from '../redux/containers/cart';
+import { Product } from '../redux/containers/product';
 import { requestProduct } from '../redux/sagas/product';
 
 class CartModal extends Component<Props, State> {
@@ -42,6 +42,7 @@ class CartModal extends Component<Props, State> {
         }
     }
 
+    // This function rounds and then displays the correct amount of decimal points for a price
     displayPrice(price: number) {
         return `$${(+price.toFixed(2)).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`
     }

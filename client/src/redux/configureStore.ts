@@ -1,8 +1,8 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import userReducer from './ducks/user';
-import productReducer from './ducks/product';
-import cartReducer from './ducks/cart';
+import userReducer from './containers/user';
+import productReducer from './containers/product';
+import cartReducer from './containers/cart';
 import rootSaga from './rootSaga';
 
 const rootReducer = combineReducers({

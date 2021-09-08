@@ -2,8 +2,8 @@ import { Component } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import UserModal from './UserModal';
 import CartModal from './CartModal';
-import { User } from '../redux/ducks/user';
-import { Cart } from '../redux/ducks/cart';
+import { User } from '../redux/containers/user';
+import { Cart } from '../redux/containers/cart';
 
 class UserRibbon extends Component<Props, State> {
     constructor(props: Props) {

@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import { Modal, Button, ListGroup, Spinner } from 'react-bootstrap';
-import { User } from '../redux/ducks/user';
+import { User } from '../redux/containers/user';
 
 class UserModal extends Component<Props, State> {
     constructor(props: Props) {
@@ -14,6 +14,7 @@ class UserModal extends Component<Props, State> {
         return sentence.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
     }
 
+    // We only want to display a subset of the available user attributes
     getUserDisplayObject() {
         return {
             "Full Name": this.sentenceToUpperCase(`${this.props.user.name.firstname} ${this.props.user.name.lastname}`),

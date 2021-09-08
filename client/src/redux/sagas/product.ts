@@ -1,7 +1,10 @@
 import { call, put } from 'redux-saga/effects';
-import { ProductFilter, ProductsRequested, productsReceived, productsError, Product, ProductKeys  } from '../ducks/product'
+import { ProductFilter, ProductsRequested, productsReceived, productsError, Product, ProductKeys  } from '../containers/product'
 import { baseUrl } from '../../config/fakeStore';
 
+// This filter will match any products that have a corresponding attribute in product filter
+// If the corresponding attribute in product filter is a substring of the product attribute, it will match
+// Easily extensible, but the code only ever calls this filter with the title key set (from the search input)
 const filterProducts = (products: Product[], productFilter: ProductFilter): Product[] => {
     if (productFilter === undefined) {
         return products;

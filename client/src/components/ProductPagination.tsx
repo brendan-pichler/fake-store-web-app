@@ -14,6 +14,9 @@ class ProductPagination extends Component<Props, State> {
         this.getMaxPage = this.getMaxPage.bind(this);
     }
 
+    // This function creates the buttons for pagination then filters based on the amount of pagination buttons desired 
+    // E.g. if maxPaginationItems==3 show each page around the active page, if maxPaginationItems==1 only show the active page
+    // It is long because of the edge cases. E.g. if the active page is 1 and the maxPaginationItems is 3, we want to show 1, 2, 3.
     getPaginationItems() {
         let paginationItems = [];
         let paginationsEitherSide = Math.floor(this.state.maxPaginationItems / 2);

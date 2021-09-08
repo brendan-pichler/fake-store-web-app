@@ -3,6 +3,7 @@
 import { Component } from 'react';
 import { InputGroup, FormControl, Button, DropdownButton, Dropdown } from 'react-bootstrap';
 import { ProductFilter } from '../redux/ducks/product';
+import { Search, XCircle, Funnel } from 'react-bootstrap-icons';
 
 class ProductPagination extends Component<Props, State> {
     constructor(props: Props) {
@@ -10,6 +11,7 @@ class ProductPagination extends Component<Props, State> {
 
         this.state = {
             searchText: "",
+            smallScreen: window.innerWidth < 576 ? true : false,
         }
 
         this.handleDropdownClick = this.handleDropdownClick.bind(this);
@@ -31,13 +33,13 @@ class ProductPagination extends Component<Props, State> {
 
     render() {
         const categories = ["electronics", "jewelery", "men's clothing", "women's clothing"];
-        const categoryFilter = this.props.productFilter?.category ? this.props.productFilter.category : "Select Category";
+        let categoryFilter = this.props.productFilter?.category ? this.props.productFilter.category.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ') : "Category";
 
         return (
             <InputGroup>
                 <DropdownButton
                     variant="outline-secondary"
-                    title={categoryFilter.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+                    title={<span><Funnel />{!this.state.smallScreen ? ` ${categoryFilter}` : null}</span>}
                     id="input-group-dropdown-1"
                     >
                     {categories.map((category) => {
@@ -52,10 +54,10 @@ class ProductPagination extends Component<Props, State> {
                     onKeyPress={(e) => e.key === 'Enter' ? this.handleSearch() : null}
                 />
                 <Button variant="outline-secondary" id="button-addon2" onClick={this.handleSearch}>
-                    Search
+                    <Search />{!this.state.smallScreen ? " Search" : null}
                 </Button>
                 <Button variant="outline-danger" id="button-addon2" onClick={this.clearFilter}>
-                    Clear Filter
+                    <XCircle />{!this.state.smallScreen ? " Clear" : null}
                 </Button>
             </InputGroup>
         )
@@ -69,6 +71,7 @@ interface Props {
 
 interface State {
     searchText: string;
+    smallScreen: boolean;
 }
 
 export default ProductPagination;

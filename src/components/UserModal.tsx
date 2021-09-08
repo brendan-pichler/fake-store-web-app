@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import { Modal, Button, ListGroup } from 'react-bootstrap';
+import { Modal, Button, ListGroup, Spinner } from 'react-bootstrap';
 import { User } from '../redux/ducks/user';
 
 class UserModal extends Component<Props, State> {
@@ -36,7 +36,12 @@ class UserModal extends Component<Props, State> {
                     <ListGroup variant="flush">
                         {this.props.user ? Object.entries(this.getUserDisplayObject()).map(([key, value]) => {
                             return <ListGroup.Item key={key+value}>{key}: {value}</ListGroup.Item>
-                        }) : "Loading user information..."}
+                        }) : 
+                        <div className="spinner-div">
+                            <Spinner animation="border" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                            </Spinner>
+                        </div>}
                     </ListGroup>
                 </Modal.Body>
                 <Modal.Footer>

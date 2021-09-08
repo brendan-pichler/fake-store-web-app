@@ -48,7 +48,7 @@ class UserRibbon extends Component<Props, State> {
                             <Button variant="light" onClick={this.openUserModal} className="ribbon-button">My User</Button>
                         </Col>
                         <Col className="col-right">
-                            <Button variant="light" onClick={this.openCartModal} className="ribbon-button">Cart</Button>
+                            <Button variant="light" onClick={this.openCartModal} className="ribbon-button">My Cart</Button>
                         </Col>
                     </Row>
                 </Container>

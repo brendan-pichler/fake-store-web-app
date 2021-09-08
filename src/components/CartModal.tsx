@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import { Modal, Button, Card, Row, Col, Container, ListGroup } from 'react-bootstrap';
+import { Modal, Button, Card, Row, Col, Container, ListGroup, Spinner } from 'react-bootstrap';
 import { Cart } from '../redux/ducks/cart';
 import { Product } from '../redux/ducks/product';
 import { requestProduct } from '../redux/sagas/product';
@@ -49,7 +49,12 @@ class CartModal extends Component<Props, State> {
     getCartDisplayObject() {
         return (
             <>
-                {this.state.loading ? "Loading..." :
+                {this.state.loading ? 
+                    <div className="spinner-div">
+                        <Spinner animation="border" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                        </Spinner>
+                    </div> :
                     <Container>
                     {this.state.cartProducts.map((cartProduct) => {
                         return (
@@ -69,8 +74,6 @@ class CartModal extends Component<Props, State> {
                                                     <Col className="col-left">
                                                         Subtotal: {this.displayPrice(cartProduct.quantity * cartProduct.price)}
                                                     </Col>
-                                                </Row>
-                                                <Row>
                                                     <Col className="col-right">
                                                         <Button variant="danger">Remove</Button>
                                                     </Col>

@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Spinner } from 'react-bootstrap';
 import { Product, ProductFilter } from '../redux/ducks/product';
 import ProductCard from './ProductCard';
 import ProductPagination from './ProductPagination'
@@ -32,7 +32,8 @@ class ProductList extends Component<Props, State> {
 
     setFilter(productFilter: ProductFilter) {
         this.setState({
-            productFilter
+            productFilter,
+            activePage: 1,
         }, () => this.searchWithFilter());
     }
 
@@ -55,7 +56,11 @@ class ProductList extends Component<Props, State> {
                         {this.props.error ? 
                         this.props.error.message : 
                         this.props.loading ? 
-                        "Loading..." : 
+                        <div className="spinner-div">
+                            <Spinner animation="border" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                            </Spinner>
+                        </div> : 
                         this.props.products.slice((this.state.activePage - 1) * this.state.itemsPerPage, this.state.activePage * this.state.itemsPerPage)
                             .map((product: Product) => {
                                 return (

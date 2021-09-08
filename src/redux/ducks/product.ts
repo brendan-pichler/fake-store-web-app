@@ -53,7 +53,7 @@ const userReducer = (state: ProductState = initialState, action: ProductAction) 
             return { ...state, products, loading: false, error: null };
         case PRODUCTS_ERROR:
             const { error } = action as ProductsError
-            return { ...state, error, loading: false };
+            return { ...state, error, loading: false, products: undefined };
         default:
             return state;
     }

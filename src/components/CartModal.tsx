@@ -34,6 +34,7 @@ class CartModal extends Component<Props, State> {
 interface Props {
     onHide: () => void;
     show: boolean;
+    cart: Cart;
 }
 
 interface State {}

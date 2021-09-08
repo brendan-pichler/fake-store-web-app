@@ -6,6 +6,7 @@ import UserRibbon from './components/UserRibbon';
 import { bindActionCreators } from 'redux';
 import { getUser } from './redux/ducks/user';
 import { productsRequested } from './redux/ducks/product';
+import { cartRequested } from './redux/ducks/cart'
 
 class App extends Component<any, any> {
   componentDidMount() {
@@ -31,11 +32,16 @@ const mapStateToProps = (state: any) => {
   return {
     user: state.user.user,
     products: state.products,
+    cart: state.cart,
   }
 }
 
 const mapDispatchToProps = (dispatch: any) => {
-  return bindActionCreators({ getUser, productsRequested}, dispatch)
+  return bindActionCreators({ 
+    getUser, 
+    productsRequested,
+    cartRequested,
+  }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

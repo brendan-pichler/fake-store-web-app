@@ -3,6 +3,7 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 import UserModal from './UserModal';
 import CartModal from './CartModal';
 import { User } from '../redux/ducks/user';
+import { Cart } from '../redux/ducks/cart';
 
 class UserRibbon extends Component<Props, State> {
     constructor(props: Props) {
@@ -60,6 +61,7 @@ class UserRibbon extends Component<Props, State> {
             <CartModal
                 show={this.state.showCartModal}
                 onHide={this.closeModal}
+                cart={this.props.cart}
             />
             </>
         )
@@ -68,6 +70,7 @@ class UserRibbon extends Component<Props, State> {
 
 interface Props {
     user: User;
+    cart: Cart;
 }
 
 interface State {

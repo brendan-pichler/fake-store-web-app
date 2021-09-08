@@ -4,9 +4,9 @@ import {  connect } from 'react-redux';
 import ProductList from './components/ProductList';
 import UserRibbon from './components/UserRibbon';
 import { bindActionCreators } from 'redux';
-import { getUser } from './redux/ducks/user';
-import { productsRequested } from './redux/ducks/product';
-import { cartRequested } from './redux/ducks/cart'
+import { getUser } from './redux/containers/user';
+import { productsRequested } from './redux/containers/product';
+import { cartRequested } from './redux/containers/cart'
 
 class App extends Component<any, any> {
   componentDidMount() {

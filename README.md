@@ -4,6 +4,8 @@ This is a dummy online store web application built using React and the [fake sto
 
 This application is publically hosted using AWS Elastic Beanstalk and can be accessed at [http://fakestorewebapp-env.eba-dpmgtf2b.ap-southeast-2.elasticbeanstalk.com/](http://fakestorewebapp-env.eba-dpmgtf2b.ap-southeast-2.elasticbeanstalk.com/)
 
+This application will change dynamically based on the screen size. Try it on mobile or use the browser debug tools to change the resolution and refresh the application.
+
 ## Running the application locally
 
 ### With Docker
@@ -43,12 +45,6 @@ To develop the application, navigate to ./client and install the dependencies wi
 To start the development environment:
 
 > npm start
-
-### Testing the application
-
-The frontend can be testing after setting up the development environment using:
-
-> npm test
 
 ## About this application
 

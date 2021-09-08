@@ -16,7 +16,6 @@ const fetchCarts = function*(): Generator<any> {
     try {
         const carts: any = yield call(requestCarts);
         const sortedCarts = sortCartsByDate(carts);
-        console.log(sortedCarts);
         yield put(cartReceived(sortedCarts[0]));
     } catch (error) {
         yield put(cartError(error as Error));

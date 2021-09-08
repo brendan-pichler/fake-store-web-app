@@ -11,7 +11,7 @@ class ProductList extends Component<Props, State> {
 
         this.state = {
             activePage: 1,
-            itemsPerPage: 4,
+            itemsPerPage: window.innerWidth >= 576 ? window.innerWidth >= 768 ? window.innerWidth >= 992 ? 6 : 4 : 3 : 3,
             productFilter: undefined
         }
 
@@ -47,9 +47,9 @@ class ProductList extends Component<Props, State> {
                         <Col><ProductSearch setFilter={this.setFilter} productFilter={this.state.productFilter} /></Col>
                     </Row>
                     <Row className="ProductFilters">
-                        <Col sm={2}></Col>
-                        <Col sm={8}><ProductPagination setActivePage={this.setActivePage} itemCount={this.props.products.length} itemsPerPage={this.state.itemsPerPage} activePage={this.state.activePage} /></Col>
-                        <Col sm={2} className="page-number-text">Displaying {(this.state.activePage - 1) * this.state.itemsPerPage + 1} - {this.state.activePage * this.state.itemsPerPage} of {this.props.products.length} items.</Col>
+                        <Col sm={3}></Col>
+                        <Col sm={6}><ProductPagination setActivePage={this.setActivePage} itemCount={this.props.products?.length} itemsPerPage={this.state.itemsPerPage} activePage={this.state.activePage} /></Col>
+                        <Col sm={3} className="page-number-text">Displaying {(this.state.activePage - 1) * this.state.itemsPerPage + 1} - {this.state.activePage * this.state.itemsPerPage} of {this.props.products?.length} items.</Col>
                     </Row>
                     <Row>
                         {this.props.error ? 
@@ -78,7 +78,7 @@ interface Props {
     products: Product[];
     loading: boolean;
     error: Error;
-    productsRequested: any;
+    productsRequested: (productFilter: ProductFilter) => void;
 }
 
 interface State {

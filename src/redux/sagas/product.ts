@@ -23,6 +23,9 @@ const filterProducts = (products: Product[], productFilter: ProductFilter): Prod
     }
 }
 
+export const requestProduct = (productId: number): Promise<Response> => {
+    return fetch(`${baseUrl}/products/${productId}`).then(response => response.json());
+}
 
 const requestProducts = (filter?: ProductFilter): Promise<Response> => {
     let filterUrl = '';

@@ -20,8 +20,10 @@ class ProductCard extends Component<Props, State> {
                     <Card.Title>{this.props.product.title}</Card.Title>
                     <Card.Text>{this.props.product.description}</Card.Text>
                     <Card.Title>{`$${(+this.props.product.price.toFixed(2)).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`}</Card.Title>
-                    <Button variant="primary">Add to Cart</Button>
                 </Card.Body>
+                <Card.Footer>
+                    <Button variant="primary">Add to Cart</Button>
+                </Card.Footer>
             </Card>
         )
     }

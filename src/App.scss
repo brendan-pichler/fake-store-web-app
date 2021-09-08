@@ -1,10 +1,11 @@
 @import "~bootstrap/scss/bootstrap";
 $corner-roundedness: 20px;
+$max-app-width: 1200px;
+$pagination-button-width: 2rem;
 
 .App {
   text-align: center;
-  align-content: center;
-  justify-content: center;
+  vertical-align: middle;
 }
 
 .App-logo {
@@ -27,26 +28,28 @@ $corner-roundedness: 20px;
   margin-bottom: 1rem;
   background-color: #282c34da;
 
-  #cart-button {
-    text-align: right;
-  }
-
-  #user-button {
-    text-align: left;
+  .ribbon-container {
+    // max-width: $max-app-width;
   }
 
   .ribbon-button {
     margin: 0.5rem;
     width: 10rem;
-
-    
   }
+}
+
+.col-left {
+  text-align: left;
+}
+
+.col-right {
+  text-align: right;
 }
 
 .ProductList {
   justify-content: center;
-  max-width: 80%;
   border-radius: $corner-roundedness;
+  max-width: $max-app-width;
 
   .row {
     border: 1px solid rgba(0, 0, 0, 0.125);
@@ -64,25 +67,41 @@ $corner-roundedness: 20px;
 
     .page-number-text {
       font-size: calc(10px + 0.5vmin);
-      color:rgba(0, 0, 0, 0.6)
+      color:rgba(0, 0, 0, 0.6);
+      margin: auto;
+      vertical-align: middle;
+    }
+    
+    li {
+      width: $pagination-button-width;
     }
 
     ul {
-      margin: 0px;
+      margin: auto;
+      width: $pagination-button-width * 7;
     }
+
+    
   }
 }
 
 .ProductCard {
   margin: 1rem;
   justify-content: center;
+  height: 40rem;
 
   img {
-    width: 100%;
+    width: 90%;
     height: 15rem;
     object-fit: contain;
-    padding: 0.5rem
+    padding: 0.5rem;
+    margin: auto;
   }
+
+    .card-text {
+      max-height: 10rem;
+      overflow: auto;  
+    }
 
   .card-header {
     text-transform: capitalize;

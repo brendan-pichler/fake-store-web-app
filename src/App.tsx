@@ -11,6 +11,7 @@ import { cartRequested } from './redux/ducks/cart'
 class App extends Component<any, any> {
   componentDidMount() {
     this.props.getUser();
+    this.props.cartRequested();
   }
 
   render () {
@@ -21,7 +22,7 @@ class App extends Component<any, any> {
         <div className="App-header">
           Fake Store API
         </div>
-        <UserRibbon user={this.props.user} />
+        <UserRibbon user={this.props.user} cart={this.props.cart.cart} />
         <ProductList productsRequested={this.props.productsRequested} products={products} loading={loading} error={error} />
       </div>
     );

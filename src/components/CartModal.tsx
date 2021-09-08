@@ -1,7 +1,94 @@
 import { Component } from 'react'
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, Card, Row, Col, Container, ListGroup } from 'react-bootstrap';
+import { Cart } from '../redux/ducks/cart';
+import { Product } from '../redux/ducks/product';
+import { requestProduct } from '../redux/sagas/product';
 
 class CartModal extends Component<Props, State> {
+    constructor(props: Props) {
+        super(props);
+
+        this.state = {
+            loading: false,
+            cartProducts: [],
+            totalPrice: 0,
+        }
+
+        this.getCartDisplayObject = this.getCartDisplayObject.bind(this);
+        this.displayPrice = this.displayPrice.bind(this);
+    }
+
+    componentDidUpdate(prevProps: Props) {
+        if (!prevProps.show && this.props.show && this.props.cart) {
+            this.setState({
+                loading: true,
+            }, async () => {
+                const cartProducts = (await Promise.all(this.props.cart.products.map((product) => requestProduct(product.productId)))).map((cartProduct: any) => {
+                    const quantity = this.props.cart.products.find((v) => v.productId === cartProduct.id)?.quantity;
+                    return {
+                        ...cartProduct,
+                        quantity
+                    }
+                });
+                const totalPrice = cartProducts.reduce((accumulator, currentValue) => {
+                    return accumulator + currentValue.quantity * currentValue.price;
+                }, 0);
+                this.setState({
+                    cartProducts,
+                    loading: false,
+                    totalPrice,
+                })
+            })
+        }
+    }
+
+    displayPrice(price: number) {
+        return `$${(+price.toFixed(2)).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`
+    }
+
+    getCartDisplayObject() {
+        return (
+            <>
+                {this.state.loading ? "Loading..." :
+                    <Container>
+                    {this.state.cartProducts.map((cartProduct) => {
+                        return (
+                                <Row key={cartProduct.id}>
+                                    <Col>
+                                    <Card>
+                                        <Card.Body>
+                                        <Card.Title>{cartProduct.title}</Card.Title>
+                                            <ListGroup variant="flush">
+                                                <ListGroup.Item>Price: {this.displayPrice(cartProduct.price)}</ListGroup.Item>
+                                                <ListGroup.Item>Quantity: {cartProduct.quantity}</ListGroup.Item>
+                                            </ListGroup>
+                                        </Card.Body>
+                                        <Card.Footer>
+                                            <Container>
+                                                <Row>
+                                                    <Col className="col-left">
+                                                        Subtotal: {this.displayPrice(cartProduct.quantity * cartProduct.price)}
+                                                    </Col>
+                                                </Row>
+                                                <Row>
+                                                    <Col className="col-right">
+                                                        <Button variant="danger">Remove</Button>
+                                                    </Col>
+                                                </Row>
+                                            </Container>
+                                        </Card.Footer>
+                                    </Card>
+                                    </Col>
+                                </Row>
+                        )
+                    })}
+                    </Container>
+                }
+            </>
+        )
+    }
+
+
     render() {
         return (
             <Modal
@@ -12,19 +99,23 @@ class CartModal extends Component<Props, State> {
                 >
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                    Modal heading
+                     My Cart
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <h4>Centered Modal</h4>
-                    <p>
-                    Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-                    dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-                    consectetur ac, vestibulum at eros.
-                    </p>
+                    {this.getCartDisplayObject()}
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={this.props.onHide}>Close</Button>
+                    <Container className="checkout-footer">
+                        <Row>
+                            <Col className="col-left">
+                                Total: {this.displayPrice(this.state.totalPrice)}
+                            </Col>
+                            <Col className="col-right">
+                                <Button variant="success" onClick={this.props.onHide}>Checkout</Button>
+                            </Col>
+                        </Row>
+                    </Container>
                 </Modal.Footer>
             </Modal>
         )
@@ -37,6 +128,10 @@ interface Props {
     cart: Cart;
 }
 
-interface State {}
+interface State {
+    loading: boolean;
+    cartProducts: (Product & { quantity: number })[];
+    totalPrice: number;
+}
 
 export default CartModal;

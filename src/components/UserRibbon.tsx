@@ -42,13 +42,13 @@ class UserRibbon extends Component<Props, State> {
         return (
             <>
             <header className="user-ribbon">
-                <Container> 
+                <Container className="ribbon-container"> 
                     <Row>
-                        <Col id="user-button">
-                            <Button onClick={this.openUserModal} className="ribbon-button">My User</Button>
+                        <Col className="col-left">
+                            <Button variant="light" onClick={this.openUserModal} className="ribbon-button">My User</Button>
                         </Col>
-                        <Col id="cart-button">
-                            <Button onClick={this.openCartModal} className="ribbon-button">Cart</Button>
+                        <Col className="col-right">
+                            <Button variant="light" onClick={this.openCartModal} className="ribbon-button">Cart</Button>
                         </Col>
                     </Row>
                 </Container>

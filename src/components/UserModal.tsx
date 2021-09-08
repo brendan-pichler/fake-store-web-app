@@ -35,7 +35,7 @@ class UserModal extends Component<Props, State> {
                 <Modal.Body>
                     <ListGroup variant="flush">
                         {this.props.user ? Object.entries(this.getUserDisplayObject()).map(([key, value]) => {
-                            return <ListGroup.Item>{key}: {value}</ListGroup.Item>
+                            return <ListGroup.Item key={key+value}>{key}: {value}</ListGroup.Item>
                         }) : "Loading user information..."}
                     </ListGroup>
                 </Modal.Body>

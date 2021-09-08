@@ -2,6 +2,7 @@ import { Component } from 'react';
 import './App.scss';
 import {  connect } from 'react-redux';
 import ProductList from './components/ProductList';
+import UserRibbon from './components/UserRibbon';
 import { bindActionCreators } from 'redux';
 import { getUser } from './redux/ducks/user';
 import { productsRequested } from './redux/ducks/product';
@@ -19,6 +20,7 @@ class App extends Component<any, any> {
         <div className="App-header">
           Fake Store API
         </div>
+        <UserRibbon user={this.props.user} />
         <ProductList productsRequested={this.props.productsRequested} products={products} loading={loading} error={error} />
       </div>
     );

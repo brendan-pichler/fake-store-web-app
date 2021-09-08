@@ -11,7 +11,7 @@ class ProductPagination extends Component<Props, State> {
     getPaginationItems() {
         let paginationItems = [];
 
-        for (let i = 1; i <= this.props.itemCount / this.props.itemsPerPage; i++) {
+        for (let i = 1; i <= Math.ceil(this.props.itemCount / this.props.itemsPerPage); i++) {
             paginationItems.push(
                 <Pagination.Item key={i} active={i === this.props.activePage} onClick={(_) => this.props.setActivePage(i)}>
                     {i}

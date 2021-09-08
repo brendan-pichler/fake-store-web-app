@@ -47,7 +47,9 @@ class ProductList extends Component<Props, State> {
                         <Col><ProductSearch setFilter={this.setFilter} productFilter={this.state.productFilter} /></Col>
                     </Row>
                     <Row className="ProductFilters">
-                        <Col><ProductPagination setActivePage={this.setActivePage} itemCount={this.props.products.length} itemsPerPage={this.state.itemsPerPage} activePage={this.state.activePage} /></Col>
+                        <Col sm={2}></Col>
+                        <Col sm={8}><ProductPagination setActivePage={this.setActivePage} itemCount={this.props.products.length} itemsPerPage={this.state.itemsPerPage} activePage={this.state.activePage} /></Col>
+                        <Col sm={2} className="page-number-text">Displaying {(this.state.activePage - 1) * this.state.itemsPerPage + 1} - {this.state.activePage * this.state.itemsPerPage} of {this.props.products.length} items.</Col>
                     </Row>
                     <Row>
                         {this.props.error ? 
@@ -57,7 +59,7 @@ class ProductList extends Component<Props, State> {
                         this.props.products.slice((this.state.activePage - 1) * this.state.itemsPerPage, this.state.activePage * this.state.itemsPerPage)
                             .map((product: Product) => {
                                 return (
-                                    <Col xs={12} sm={6} md={4} key={product.title.toString()}>
+                                    <Col xs={12} md={6} lg={4} key={product.title.toString()}>
                                         <ProductCard product={product}/>
                                     </Col>
                                 )

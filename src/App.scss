@@ -1,4 +1,5 @@
 @import "~bootstrap/scss/bootstrap";
+$corner-roundedness: 20px;
 
 .App {
   text-align: center;
@@ -13,19 +14,39 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 15vh;
+  min-height: 10vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.user-ribbon {
   margin-bottom: 1rem;
+  background-color: #282c34da;
+
+  #cart-button {
+    text-align: right;
+  }
+
+  #user-button {
+    text-align: left;
+  }
+
+  .ribbon-button {
+    margin: 0.5rem;
+    width: 10rem;
+
+    
+  }
 }
 
 .ProductList {
   justify-content: center;
   max-width: 80%;
+  border-radius: $corner-roundedness;
 
   .row {
     border: 1px solid rgba(0, 0, 0, 0.125);
@@ -33,19 +54,23 @@
   }
 
   .ProductFilters {
-    text-transform: capitalize;
     padding: 0.5rem;
     background-color: rgba(0, 0, 0, 0.03);
     border: 1px solid rgba(0, 0, 0, 0.125);
+
+    .input-group {
+      text-transform: capitalize;
+    }
+
+    .page-number-text {
+      font-size: calc(10px + 0.5vmin);
+      color:rgba(0, 0, 0, 0.6)
+    }
 
     ul {
       margin: 0px;
     }
   }
-}
-
-.capitalise {
-  text-transform: capitalize;
 }
 
 .ProductCard {

@@ -1,8 +1,8 @@
-# Fake Store Web Application
+# Fake Store Web Application - Brendan Pichler
 
 This is a dummy online store web application built using React and the [fake store api](http://fakestoreapi.com/)
 
-This application is publically hosted using AWS Elastic Beanstalk and can be accessed at [http://fakestorewebapp-env.eba-dpmgtf2b.ap-southeast-2.elasticbeanstalk.com/](http://fakestorewebapp-env.eba-dpmgtf2b.ap-southeast-2.elasticbeanstalk.com/)
+This application is publically hosted using AWS Elastic Beanstalk and can be accessed at [http://fakestorewebapp-env-2.eba-3x8fvp3s.ap-southeast-2.elasticbeanstalk.com/](http://fakestorewebapp-env-2.eba-3x8fvp3s.ap-southeast-2.elasticbeanstalk.com/)
 
 This application will change dynamically based on the screen size. Try it on mobile or use the browser debug tools to change the resolution and refresh the application.
 
@@ -20,11 +20,11 @@ Then run the image:
 
 > docker run -p 80:3000 fake-store-app
 
-You should now be able to access the application on [http://localhost](http://localhost)
+You should now be able to access the application on [http://localhost](http://localhost).
 
 ### Without Docker
 
-To run this application without docker, please download NodeJS 16 [https://nodejs.org/en/download/current/](https://nodejs.org/en/download/current/) and then, in root directory, install the dependencies:
+To run this application without docker, please download NodeJS v14.17.6 [https://nodejs.org/en/download/](https://nodejs.org/en/download/) and then, in root directory, install the dependencies:
 
 > npm install
 
@@ -32,7 +32,7 @@ And run the application with:
 
 > npm start
 
-You should now be able to access the application on [http://localhost:3000](http://localhost:3000)
+You should now be able to access the application on [http://localhost:3000](http://localhost:3000).
 
 ## Setting up the development environment
 
@@ -48,7 +48,7 @@ To start the development environment:
 
 ## About this application
 
-This application uses React with TypeScript. TypeScript is a must have and is incredibly useful for software maintainability and also works to self document code.
+This application uses React with TypeScript. TypeScript is a must have and is incredibly useful for teams and software maintainability. It also works to self document code.
 
 This application uses [Redux Saga](https://redux-saga.js.org/) to manage application state and calls to the fake store api. This makes it easy to share state around the application and handle errors. Folder structure for Redux has been designed to group actions, reducers, and state with their components, in this way, each module is self contained.
 
@@ -60,11 +60,9 @@ For Git, I used branching workflows. Branch for new feature, develop with atomic
 
 ## Notes about Application Architecture
 
-I am including some notes about the application architecture here where it differs from what I would design for an enterprise application here.
+Obviously, the Fake Store API is insecure, everyone can access everyone's carts, user details, etc. In a real application, the calls to the api would be passed to the backend where the session key of the user is authenticated and data is retrieved.
 
-Obviously, the Fake Store API is completely insecure, everyone can access everyone's carts, user details, etc. In a real application, the calls to the api would be passed to the backend where the session key is authenticated and data is retrieved. I would also never display a user password in the application, or even store it in a database without hashing and salting first, but have included it because it is in the requirements.
-
-In this application, filtering has been done after receiving data from the database (except in the case of retrieving the Category) as the API doesn't support filtering on arbitrary fields. The filtering algorithm will match the search attribute to the corresponding product attribute, after pulling all the products from the database. With a lot of products, this would cause poor performance. Normally, I would make a call to the backend, which would then construct a database query with the filter and return the results. Pagination would be done in a similar way, but has been done with front end logic in the application. (E.g. using OFFSET and FETCH NEXT in SQL).
+In this application, filtering has been done after receiving data from the database (except in the case of retrieving the Category) as the API doesn't support filtering on arbitrary fields. The filtering algorithm will match the search attribute to the corresponding product attribute, after pulling all the products from the database. If there were a lot of products, having all the products rendered or in memory could cause poor performance. Normally, I would make a call to the backend with the filters as parameters, which would then construct a database query with the filters and return the results. Pagination would also normally be done in a similar way to avoid pulling all of the products, but has been done with front end logic in the application. (E.g. using OFFSET and FETCH NEXT in SQL).
 
 ## Notes about Software Design and Principles
 
@@ -74,4 +72,4 @@ Comments: My normal philosphy is comment why when the why isn't obvious, code sh
 
 Repo structure: Normally, I would use a DEV, UAT, PROD branching scheme in the repo and each would use a continuous delivery pipeline to automatically build and deploy to the relevant environment on AWS.
 
-Project Management: I an actual project, I would also set up the project in Jira, create a backlog, prioritise, etc. and link the commits to the Jira tasks.
+Project Management: In an actual project, I would set up the project in Jira, create a backlog, prioritise, etc. and link the commits to the Jira tasks.

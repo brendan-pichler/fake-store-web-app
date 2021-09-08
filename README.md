@@ -58,6 +58,8 @@ The application uses a NodeJS backend.
 
 For Git, I used branching workflows. Branch for new feature, develop with atomic commits, create pull request, merge into master. I didn't bother with pull requests for this application, but in a team I would.
 
+Please note: Only the cart view functionality has been implemented based on the spec. The buttons are there to add and remove from cart but they do nothing, same with the checkout button. If I had more time I would implement this. I would also remove the description, change the mobile layout to be 2 accross to fit more on the page, and allow the user to click on products and have them pop up a modal or separate page with more information.
+
 ## Notes about Application Architecture
 
 Obviously, the Fake Store API is insecure, everyone can access everyone's carts, user details, etc. In a real application, the calls to the api would be passed to the backend where the session key of the user is authenticated and data is retrieved.

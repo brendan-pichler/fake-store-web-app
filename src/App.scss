@@ -31,7 +31,7 @@ $pagination-button-width: 2rem;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px);
+  font-size: 10px;
   color: white;
 }
 
@@ -107,20 +107,26 @@ $pagination-button-width: 2rem;
 .ProductCard {
   margin: 1rem;
   justify-content: center;
-  height: 40rem;
+  height: 42rem;
 
   img {
     width: 90%;
-    height: 15rem;
+    height: 12rem;
     object-fit: contain;
     padding: 0.5rem;
     margin: auto;
   }
 
-    .card-text {
-      max-height: 10rem;
-      overflow: auto;  
-    }
+  .card-title {
+    max-height: 6rem;
+    overflow: hidden;
+    font-size: 1.25rem;
+  }
+
+  .card-text {
+    max-height: 12rem;
+    overflow: auto;  
+  }
 
   .card-header {
     text-transform: capitalize;

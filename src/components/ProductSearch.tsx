@@ -17,6 +17,7 @@ class ProductPagination extends Component<Props, State> {
         this.handleDropdownClick = this.handleDropdownClick.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
         this.clearFilter = this.clearFilter.bind(this);
+        this.sentenceToUpperCase = this.sentenceToUpperCase.bind(this);
     }
 
     clearFilter() {
@@ -31,9 +32,13 @@ class ProductPagination extends Component<Props, State> {
         this.props.setFilter({ ...this.props.productFilter, category })
     }
 
+    sentenceToUpperCase = (sentence: string): string => {
+        return sentence.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+    }
+    
     render() {
         const categories = ["electronics", "jewelery", "men's clothing", "women's clothing"];
-        let categoryFilter = this.props.productFilter?.category ? this.props.productFilter.category.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ') : "Category";
+        let categoryFilter = this.props.productFilter?.category ? this.sentenceToUpperCase(this.props.productFilter.category) : "Category";
 
         return (
             <InputGroup>

@@ -7,15 +7,20 @@ class UserModal extends Component<Props, State> {
         super(props);
 
         this.getUserDisplayObject = this.getUserDisplayObject.bind(this);
+        this.sentenceToUpperCase = this.sentenceToUpperCase.bind(this);
+    }
+
+    sentenceToUpperCase = (sentence: string): string => {
+        return sentence.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
     }
 
     getUserDisplayObject() {
         return {
-            "Full Name": `${this.props.user.name.firstname} ${this.props.user.name.lastname}`,
+            "Full Name": this.sentenceToUpperCase(`${this.props.user.name.firstname} ${this.props.user.name.lastname}`),
             "Email": this.props.user.email,
             "User Name": this.props.user.username,
             "Password": this.props.user.password,
-            "Address": `${this.props.user.address.number} ${this.props.user.address.street}, ${this.props.user.address.city}.`
+            "Address": this.sentenceToUpperCase(`${this.props.user.address.number} ${this.props.user.address.street}, ${this.props.user.address.city}.`),
         }
     }
 
